@@ -10,9 +10,9 @@ const fs = require('fs');
 // .map(Number) converts each line (string) into an actual number.
 
 const entries = fs.readFileSync('input.txt', 'utf8')
-.map(Number)
 .trim()
-.split('\n');
+.split('\n')
+.map(Number);
 
 // Use a Set to track seen numbers.
 
