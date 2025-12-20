@@ -1,16 +1,16 @@
 const fs = require('fs');
 
-// Read all boarding passes
+// Read all boarding passes.
 const lines = fs.readFileSync('input.txt', 'utf8')
   .trim()
   .split('\n');
 
-// Convert boarding pass string to seat ID
+// Convert boarding pass string to seat ID.
 function seatIdFromCode(code) {
-  const rowCode = code.slice(0, 7);  // first 7 chars
-  const colCode = code.slice(7);     // last 3 chars
+  const rowCode = code.slice(0, 7);  // First 7 characters.
+  const colCode = code.slice(7);     // Last 3 characters.
 
-  // F/L -> 0, B/R -> 1, then parse as binary
+  // Convert F/L to 0 and B/R to 1, then parse as binary.
   const rowBin = rowCode.replace(/F/g, '0').replace(/B/g, '1');
   const colBin = colCode.replace(/L/g, '0').replace(/R/g, '1');
 
@@ -23,10 +23,10 @@ function seatIdFromCode(code) {
 // Compute all seat IDs
 const seatIds = lines.map(seatIdFromCode);
 
-// Part 1: highest seat ID
+// --- Part 1: Highest seat ID ---
 const part1 = Math.max(...seatIds);
 
-// Part 2: find missing seat ID with neighbors present
+// --- Part 2: Find missing seat ID with neighbors present ---
 seatIds.sort((a, b) => a - b);
 
 let part2 = null;

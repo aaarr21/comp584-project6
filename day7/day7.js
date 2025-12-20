@@ -1,20 +1,20 @@
 const fs = require('fs');
 
-// Read input lines (rules)
+// Read input lines (rules).
 const lines = fs.readFileSync('input.txt', 'utf8')
   .trim()
   .split('\n');
 
-// Parse rules into map: outerColor -> [{count, color}, ...]
+// Parse rules into a map: outerColor -> [{count, color}, ...].
 const contains = new Map();
 
 for (const line of lines) {
-  // example line: "light red bags contain 1 bright white bag, 2 muted yellow bags."
+  // Example line: "light red bags contain 1 bright white bag, 2 muted yellow bags."
   const [outerPart, innerPart] = line.split(' contain ');
   const outerColor = outerPart.replace(/ bags?$/, '');
 
   if (innerPart.startsWith('no other')) {
-    contains.set(outerColor, []); // contains nothing
+    contains.set(outerColor, []); // Contains nothing.
     continue;
   }
 
@@ -28,8 +28,8 @@ for (const line of lines) {
   contains.set(outerColor, inner);
 }
 
-// ---------------- Part 1 ----------------
-// Build reverse graph: childColor -> Set of parentColors that can directly hold it
+// --- Part 1 ---
+// Build reverse graph: childColor -> Set of parent colors that can directly hold it.
 const reverse = new Map();
 for (const [outer, inners] of contains.entries()) {
   for (const { color: child } of inners) {
@@ -58,8 +58,8 @@ function part1(target = 'shiny gold') {
   return seen.size; // number of colors that can eventually contain target
 }
 
-// ---------------- Part 2 ----------------
-// Memoized recursion to count total bags inside a color
+// --- Part 2 ---
+// Memoized recursion to count total bags inside a color.
 const memo = new Map();
 
 function totalInside(color) {

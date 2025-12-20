@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// Read map as array of strings (rows)
+// Read map as an array of strings (rows).
 const rows = fs.readFileSync('input.txt', 'utf8')
   .trim()
   .split('\n');
@@ -8,14 +8,14 @@ const rows = fs.readFileSync('input.txt', 'utf8')
 const height = rows.length;
 const width = rows[0].length;
 
-// Count trees for a given slope (right, down)
+// Count trees for a given slope (right, down).
 function treesForSlope(right, down) {
   let row = 0;
   let col = 0;
   let trees = 0;
 
   while (row < height) {
-    const cell = rows[row][col % width]; // wrap horizontally with modulo
+    const cell = rows[row][col % width]; // Wrap horizontally with modulo.
     if (cell === '#') trees++;
 
     row += down;
@@ -25,10 +25,10 @@ function treesForSlope(right, down) {
   return trees;
 }
 
-// Part 1: slope (3, 1)
+// --- Part 1: Slope (3, 1) ---
 const part1 = treesForSlope(3, 1);
 
-// Part 2: multiply trees for all slopes
+// --- Part 2: Multiply trees for all slopes ---
 const slopes = [
   [1, 1],
   [3, 1],

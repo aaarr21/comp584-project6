@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-// Read whole file, split passports by blank lines
+// Read whole file and split passports by blank lines.
 const passportsRaw = fs.readFileSync('input.txt', 'utf8')
   .trim()
   .split('\n\n');
 
-// Parse each passport into an object { byr: '1980', iyr: '2012', ... }
+// Parse each passport into an object (e.g., { byr: '1980', iyr: '2012', ... }).
 const passports = passportsRaw.map(block => {
   const fields = block.replace(/\n/g, ' ').split(' ');
   const obj = {};
@@ -18,12 +18,13 @@ const passports = passportsRaw.map(block => {
 
 const required = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
 
-// ---------- Part 1: just check that all required fields exist ----------
+// --- Part 1: Just check that all required fields exist ---
 function hasAllRequiredFields(p) {
   return required.every(key => key in p);
 }
 
-// ---------- Part 2: validate the values ----------
+// --- Part 2: Validate the values ---
+
 function isValidYear(str, min, max) {
   if (!/^\d{4}$/.test(str)) return false;
   const year = Number(str);
@@ -67,7 +68,7 @@ function isStrictlyValid(p) {
   );
 }
 
-// Count for each part
+// Count totals for each part.
 let part1 = 0;
 let part2 = 0;
 

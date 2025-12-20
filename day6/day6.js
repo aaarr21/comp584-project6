@@ -1,22 +1,22 @@
 const fs = require('fs');
 
-// Read file and split into groups (separated by blank lines)
+// Read file and split into groups (separated by blank lines).
 const groups = fs.readFileSync('input.txt', 'utf8')
   .trim()
   .split('\n\n');
 
-// -------- Part 1: union (anyone answered "yes") --------
+// --- Part 1: Union (anyone answered "yes") ---
 let part1 = 0;
 
 for (const group of groups) {
-  // Remove newlines, get all chars in one string
+  // Remove newlines and get all characters in one string.
   const answers = group.replace(/\n/g, '');
-  // Use a Set to keep unique letters
+  // Use a Set to keep unique letters.
   const set = new Set(answers.split(''));
   part1 += set.size;
 }
 
-// -------- Part 2: intersection (everyone answered "yes") --------
+// --- Part 2: Intersection (everyone answered "yes") ---
 let part2 = 0;
 
 for (const group of groups) {
